@@ -8,6 +8,7 @@ export const formValues = {
   director: "",
   actors: [],
   status: "draft",
+  category: "",
 };
 
 export const validation = () => {
@@ -28,5 +29,6 @@ export const validation = () => {
       .required("Must have actors")
       .min(2, "Sorry, minimum number of actors is 2"),
     status: Yup.string().required("Sorry the status is required"),
+    category: Yup.string().required("Sorry, the category is required"),
   });
 };

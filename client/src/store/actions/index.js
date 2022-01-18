@@ -15,6 +15,8 @@ import {
   CHANGE_USER_EMAIL,
   UPDATE_USER_PROFILE,
   VERIFY_ACCOUNT,
+  GET_CATEGORIES,
+  ADD_CATEGORY,
 } from "../types";
 
 // ARTICLES
@@ -45,6 +47,14 @@ export const updateArticleStatus = (article) => {
 
 export const deleteArticle = (article) => {
   return { type: DELETE_ARTICLE, payload: article };
+};
+
+export const getCategories = (categories) => {
+  return { type: GET_CATEGORIES, payload: categories };
+};
+
+export const addCategory = (categories) => {
+  return { type: ADD_CATEGORY, payload: categories };
 };
 
 // NOTIFICATIONS

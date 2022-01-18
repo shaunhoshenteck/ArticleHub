@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAdminArticle,
   updateArticle,
+  getCategories,
 } from "../../../store/actions/article_actions";
 import { clearCurrentArticle } from "../../../store/actions";
 import WYSIWYG from "../../../utils/forms/wysiwyg";
@@ -78,6 +79,7 @@ const EditArticle = (props) => {
   // EDIT PART
 
   useEffect(() => {
+    dispatch(getCategories());
     dispatch(getAdminArticle(props.match.params.id));
   }, [dispatch, props.match.params]);
 
@@ -202,6 +204,36 @@ const EditArticle = (props) => {
               {...formik.getFieldProps("director")}
               {...errorHelper(formik, "director")}></TextField>
           </div>
+
+          <FormControl variant="outlined">
+            <h5>Select a Category</h5>
+            <Select
+              name="category"
+              {...formik.getFieldProps("category")}
+              error={
+                formik.errors.category && formik.touched.category ? true : false
+              }>
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {articles.categories
+                ? articles.categories.map((item) => {
+                    return (
+                      <MenuItem key={item._id} value={item._id}>
+                        {item.name}
+                      </MenuItem>
+                    );
+                  })
+                : null}
+            </Select>
+            {formik.errors.category && formik.touched.category ? (
+              <FormHelperText error={true}>
+                {formik.errors.category}
+              </FormHelperText>
+            ) : null}
+          </FormControl>
+
+          <Divider className="mt-3 mb-3"></Divider>
 
           <FormControl variant="outlined">
             <h5>Select Status</h5>

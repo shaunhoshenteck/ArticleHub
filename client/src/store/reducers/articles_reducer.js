@@ -6,6 +6,8 @@ import {
   GET_ADMIN_ARTICLES,
   UPDATE_ARTICLE_STATUS,
   DELETE_ARTICLE,
+  GET_CATEGORIES,
+  ADD_CATEGORY,
 } from "../types";
 
 export default function articlesReducer(state = {}, action) {
@@ -30,6 +32,10 @@ export default function articlesReducer(state = {}, action) {
         ...state,
         adminArticles: { ...state.adminArticles, docs: action.payload },
       };
+    case GET_CATEGORIES:
+      return { ...state, categories: action.payload };
+    case ADD_CATEGORY:
+      return { ...state, categories: action.payload };
     default:
       return state;
   }

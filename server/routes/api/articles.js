@@ -3,6 +3,7 @@ let router = express.Router();
 require("dotenv").config();
 
 const { Article } = require("../../models/article_model");
+const { Category } = require("../../models/category_model");
 const { checkLoggedIn } = require("../../middleware/auth");
 const { grantAccess } = require("../../middleware/roles");
 const { sortArgsHelper } = require("../../config/helpers");
@@ -92,7 +93,9 @@ router.delete(
 router.get("/get_byid/:id", async (req, res) => {
   try {
     const _id = req.params.id;
-    const article = await Article.find({ _id: _id, status: "public" });
+    const article = await Article.find({ _id: _id, status: "public" }).populate(
+      "category"
+    );
 
     if (!article || article.length === 0) {
       return res.status(400).json({ message: "Article not found" });
@@ -109,6 +112,7 @@ router.post("/loadmore", async (req, res) => {
     let sortArgs = sortArgsHelper(req.body);
     // console.log(sortArgs);
     const articles = await Article.find({ status: "public" })
+      .populate("category")
       .sort([[sortArgs.sortBy, sortArgs.order]])
       .skip(sortArgs.skip)
       .limit(sortArgs.limit);
@@ -141,6 +145,31 @@ router.post(
       res.status(200).json(articles);
     } catch (err) {
       res.status(400).json({ message: "Error", err });
+    }
+  }
+);
+
+router.get("/categories", async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.status(200).json(categories);
+  } catch (err) {
+    res.status(400).json({ message: "Error getting categories" }, err);
+  }
+});
+
+router.post(
+  "/categories",
+  checkLoggedIn,
+  grantAccess("createAny", "categories"),
+  async (req, res) => {
+    try {
+      const category = new Category(req.body);
+      await category.save();
+
+      res.status(200).json(category);
+    } catch (err) {
+      res.status(400).json({ message: "Error getting categories" }, err);
     }
   }
 );

@@ -6,6 +6,8 @@ export const ADD_ARTICLE = "add_article";
 export const GET_ADMIN_ARTICLES = "get_admin_articles";
 export const UPDATE_ARTICLE_STATUS = "update_article_status";
 export const DELETE_ARTICLE = "delete_article";
+export const GET_CATEGORIES = "get_categories";
+export const ADD_CATEGORY = "add_category";
 
 // for notifications
 export const ERROR_GLOBAL = "error_global";

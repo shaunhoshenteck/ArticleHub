@@ -5,6 +5,7 @@ require("dotenv").config();
 const { User } = require("../../models/user_model");
 const { checkLoggedIn } = require("../../middleware/auth");
 const { grantAccess } = require("../../middleware/roles");
+const { contactMail, registerEmail } = require("../../config/email");
 
 // Register
 router.post("/register", async (req, res) => {
@@ -22,8 +23,11 @@ router.post("/register", async (req, res) => {
 
     // generate token
     const token = user.generateToken();
-
     const doc = await user.save();
+
+    // send email to user for verification
+    const emailToken = user.generateRegisterToken();
+    await registerEmail(doc.email, emailToken);
 
     res.cookie("x-access-token", token).status(200).send(getUserProps(doc));
   } catch (err) {
@@ -134,6 +138,32 @@ router.patch(
   }
 );
 
+router.post("/contact", async (req, res) => {
+  try {
+    await contactMail(req.body);
+    res.status(200).send("ok");
+  } catch (err) {
+    res.status(400).json({ message: "Sorry, Try again later", error: err });
+  }
+});
+
+router.get("/verify", async (req, res) => {
+  try {
+    console.log(req.query.validation);
+    const token = User.validateToken(req.query.validation);
+    const user = await User.findById(token._id);
+    if (!user) return res.status(400).json({ message: "User not found" });
+    if (user.verified)
+      return res.status(400).json({ message: "Already verified" });
+
+    user.verified = true;
+    await user.save();
+    res.status(200).send(getUserProps(user));
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 const getUserProps = (props) => {
   return {
     _id: props._id,
@@ -142,6 +172,7 @@ const getUserProps = (props) => {
     lastname: props.lastname,
     age: props.age,
     role: props.role,
+    verified: props.verified,
   };
 };
 

@@ -103,3 +103,30 @@ export const updateUserProfile = (data) => {
     }
   };
 };
+
+export const contactUs = (data) => {
+  return async (dispatch) => {
+    try {
+      await axios.post("/api/users/contact", data);
+      dispatch(users.successGlobal("We Will Contact You Back"));
+    } catch (err) {
+      dispatch(users.errorGlobal(err.response.data.message));
+    }
+  };
+};
+
+export const accountVerify = (token) => {
+  return async (dispatch, getState) => {
+    try {
+      const user = getState().users.auth;
+      await axios.get(`/api/users/verify?validation=${token}`);
+
+      if (user) {
+        dispatch(users.accountVerify());
+      }
+      dispatch(users.successGlobal("Account Verified"));
+    } catch (err) {
+      dispatch(users.errorGlobal(err.response.data.message));
+    }
+  };
+};

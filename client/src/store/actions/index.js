@@ -14,6 +14,7 @@ import {
   DELETE_ARTICLE,
   CHANGE_USER_EMAIL,
   UPDATE_USER_PROFILE,
+  VERIFY_ACCOUNT,
 } from "../types";
 
 // ARTICLES
@@ -78,6 +79,10 @@ export const changeUserEmail = (data) => {
 
 export const updateUserProfile = (userData) => {
   return { type: UPDATE_USER_PROFILE, payload: userData };
+};
+
+export const accountVerify = () => {
+  return { type: VERIFY_ACCOUNT };
 };
 
 // SITE

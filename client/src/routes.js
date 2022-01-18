@@ -17,6 +17,8 @@ import Articles from "./components/dashboard/articles";
 import AddArticle from "./components/dashboard/articles/add";
 import Article from "./components/articles/article";
 import EditArticle from "./components/dashboard/articles/edit";
+import Contact from "./components/contact";
+import AccountVerify from "./components/auth/verification";
 
 const Routes = () => {
   const [loading, setLoading] = useState(true);
@@ -55,6 +57,8 @@ const Routes = () => {
               component={AuthGuard(Articles, true)}
             />
             <Route path="/dashboard/profile" component={AuthGuard(Profile)} />
+            <Route path="/verification" component={AccountVerify}></Route>
+            <Route path="/contact" component={Contact}></Route>
             <Route path="/dashboard" component={AuthGuard(Dashboard)} />
             <Route path="/article/:id" component={Article} />
             <Route path="/auth" component={Auth} />

@@ -44,6 +44,10 @@ const userSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  verified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {
@@ -68,10 +72,22 @@ userSchema.methods.generateToken = function () {
   return token;
 };
 
+userSchema.methods.generateRegisterToken = function () {
+  let user = this;
+  const userObj = { _id: user._id.toHexString() };
+  const token = jwt.sign(userObj, process.env.DB_SECRET, { expiresIn: "10h" });
+  return token;
+};
+
 userSchema.methods.comparePassword = async function (password) {
   const user = this;
   const match = await bcrypt.compare(password, user.password);
   return match;
+};
+
+userSchema.statics.validateToken = function (token) {
+  const verify = jwt.verify(token, process.env.DB_SECRET);
+  return verify;
 };
 
 const User = mongoose.model("User", userSchema);

@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import ArticleCard from "../../utils/articleCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getArticles } from "../../store/actions/article_actions";
@@ -44,15 +44,19 @@ const Home = () => {
             })
           : null}
       </Grid>
-      <button
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        size="large"
+        className="mt-3"
         onClick={() => {
           let skip = sort.skip + sort.limit;
           dispatch(getArticles({ ...sort, skip: skip }));
           setSort({ skip: skip });
-        }}
-      >
+        }}>
         Load More
-      </button>
+      </Button>
     </>
   );
 };

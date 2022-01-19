@@ -52,12 +52,12 @@ export const addArticle = (article) => {
   };
 };
 
-export const getPaginateArticles = (page = 1, limit = 5) => {
+export const getPaginateArticles = (page = 1, limit = 5, keywords = "") => {
   return async (dispatch) => {
     try {
       const request = await axios.post(
         `/api/articles/admin/paginate`,
-        { page, limit },
+        { keywords, page, limit },
         getAuthHeader()
       );
       dispatch(articles.getPaginatArticles(request.data));

@@ -20,6 +20,7 @@ import EditArticle from "./components/dashboard/articles/edit";
 import Contact from "./components/contact";
 import AccountVerify from "./components/auth/verification";
 import Categories from "./components/dashboard/categories";
+import SearchResults from "./components/search";
 
 const Routes = () => {
   const [loading, setLoading] = useState(true);
@@ -63,6 +64,7 @@ const Routes = () => {
             />
             <Route path="/dashboard/profile" component={AuthGuard(Profile)} />
             <Route path="/verification" component={AccountVerify}></Route>
+            <Route path="/searchresults" component={SearchResults}></Route>
             <Route path="/contact" component={Contact}></Route>
             <Route path="/dashboard" component={AuthGuard(Dashboard)} />
             <Route path="/article/:id" component={Article} />

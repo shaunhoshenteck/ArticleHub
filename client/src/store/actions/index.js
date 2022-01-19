@@ -17,6 +17,7 @@ import {
   VERIFY_ACCOUNT,
   GET_CATEGORIES,
   ADD_CATEGORY,
+  NAV_SEARCH,
 } from "../types";
 
 // ARTICLES
@@ -55,6 +56,10 @@ export const getCategories = (categories) => {
 
 export const addCategory = (categories) => {
   return { type: ADD_CATEGORY, payload: categories };
+};
+
+export const NavSearch = (articles) => {
+  return { type: NAV_SEARCH, payload: articles };
 };
 
 // NOTIFICATIONS

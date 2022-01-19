@@ -14,6 +14,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import MailIcon from "@material-ui/icons/Mail";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import NavSearch from "./search";
 
 const SideDrawer = ({ users, signOutUser }) => {
   const [state, setState] = useState(false);
@@ -22,24 +23,16 @@ const SideDrawer = ({ users, signOutUser }) => {
     <>
       <DehazeIcon
         className="drawer_btn"
-        onClick={() => setState(true)}
-      ></DehazeIcon>
+        onClick={() => setState(true)}></DehazeIcon>
       <Drawer anchor={"right"} open={state} onClose={() => setState(false)}>
-        <form style={{ margin: "20px" }}>
-          <TextField
-            id="outlined-basic"
-            label="Search movie"
-            variant="outlined"
-          ></TextField>
-        </form>
+        <NavSearch closeDrawer={() => setState(false)}></NavSearch>
         <Divider></Divider>
         <List>
           <ListItem
             button
             component={RouterLink}
             to="/"
-            onClick={() => setState(false)}
-          >
+            onClick={() => setState(false)}>
             <ListItemIcon>
               <HomeIcon></HomeIcon>
             </ListItemIcon>
@@ -50,8 +43,7 @@ const SideDrawer = ({ users, signOutUser }) => {
             button
             component={RouterLink}
             to="/contact"
-            onClick={() => setState(false)}
-          >
+            onClick={() => setState(false)}>
             <ListItemIcon>
               <MailIcon></MailIcon>
             </ListItemIcon>
@@ -63,8 +55,7 @@ const SideDrawer = ({ users, signOutUser }) => {
               button
               component={RouterLink}
               to="/auth"
-              onClick={() => setState(false)}
-            >
+              onClick={() => setState(false)}>
               <ListItemIcon>
                 <VpnKeyIcon></VpnKeyIcon>
               </ListItemIcon>
@@ -76,8 +67,7 @@ const SideDrawer = ({ users, signOutUser }) => {
               onClick={() => {
                 signOutUser();
                 setState(false);
-              }}
-            >
+              }}>
               <ListItemIcon>
                 <VpnKeyIcon></VpnKeyIcon>
               </ListItemIcon>
@@ -93,8 +83,7 @@ const SideDrawer = ({ users, signOutUser }) => {
                   button
                   component={RouterLink}
                   to="/dashboard"
-                  onClick={() => setState(false)}
-                >
+                  onClick={() => setState(false)}>
                   <ListItemIcon>
                     <DashboardIcon></DashboardIcon>
                   </ListItemIcon>

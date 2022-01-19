@@ -16,8 +16,7 @@ const ArticleCard = ({ article }) => {
     <Card>
       <CardMedia
         style={{ height: 0, paddingTop: "56.25%" }}
-        image="https://picsum.photos/200"
-      ></CardMedia>
+        image="https://picsum.photos/200"></CardMedia>
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
           {article.title}
@@ -34,8 +33,7 @@ const ArticleCard = ({ article }) => {
           size="small"
           color="primary"
           component={RouterLink}
-          to={`/article/${article._id}`}
-        >
+          to={`/article/${article._id}`}>
           View Article
         </Button>
       </CardActions>

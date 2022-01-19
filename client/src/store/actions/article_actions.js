@@ -163,3 +163,18 @@ export const addCategory = (values) => {
     }
   };
 };
+
+export const getSearchNavResults = (page = 1, limit = 5, keywords = "") => {
+  return async (dispatch) => {
+    try {
+      const request = await axios.post(`/api/articles/user/search`, {
+        keywords,
+        page,
+        limit,
+      });
+      dispatch(articles.NavSearch(request.data));
+    } catch (err) {
+      dispatch(articles.errorGlobal("Error, try again"));
+    }
+  };
+};

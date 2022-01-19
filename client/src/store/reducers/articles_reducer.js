@@ -8,6 +8,7 @@ import {
   DELETE_ARTICLE,
   GET_CATEGORIES,
   ADD_CATEGORY,
+  NAV_SEARCH,
 } from "../types";
 
 export default function articlesReducer(state = {}, action) {
@@ -36,6 +37,8 @@ export default function articlesReducer(state = {}, action) {
       return { ...state, categories: action.payload };
     case ADD_CATEGORY:
       return { ...state, categories: action.payload };
+    case NAV_SEARCH:
+      return { ...state, navsearch: action.payload };
     default:
       return state;
   }

@@ -21,7 +21,7 @@ import Contact from "./components/contact";
 import AccountVerify from "./components/auth/verification";
 import Categories from "./components/dashboard/categories";
 import SearchResults from "./components/search";
-import TestUpload from "./components/dashboard/testupload";
+import Avatar from "./components/dashboard/avatar";
 
 const Routes = () => {
   const [loading, setLoading] = useState(true);
@@ -64,10 +64,7 @@ const Routes = () => {
               component={AuthGuard(Categories)}
             />
             <Route path="/dashboard/profile" component={AuthGuard(Profile)} />
-            <Route
-              path="/dashboard/testupload"
-              component={AuthGuard(TestUpload)}
-            />
+            <Route path="/dashboard/avatar" component={AuthGuard(Avatar)} />
             <Route path="/verification" component={AccountVerify}></Route>
             <Route path="/searchresults" component={SearchResults}></Route>
             <Route path="/contact" component={Contact}></Route>

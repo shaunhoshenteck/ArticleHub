@@ -17,6 +17,9 @@ const AdminLayout = (props) => {
               <ListItem component={RouterLink} to="/dashboard/profile" button>
                 <ListItemText primary="Profile"></ListItemText>
               </ListItem>
+              <ListItem component={RouterLink} to="/dashboard/avatar" button>
+                <ListItemText primary="Avatar"></ListItemText>
+              </ListItem>
               {users.data.role === "admin" ? (
                 <>
                   <ListItem
@@ -30,12 +33,6 @@ const AdminLayout = (props) => {
                     to="/dashboard/categories"
                     button>
                     <ListItemText primary="Categories"></ListItemText>
-                  </ListItem>
-                  <ListItem
-                    component={RouterLink}
-                    to="/dashboard/testupload"
-                    button>
-                    <ListItemText primary="Avatar"></ListItemText>
                   </ListItem>
                 </>
               ) : null}

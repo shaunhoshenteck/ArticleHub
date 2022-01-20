@@ -21,6 +21,7 @@ export const SIGN_OUT = "sign_out";
 export const CHANGE_USER_EMAIL = "change_user_email";
 export const UPDATE_USER_PROFILE = "update_user_profile";
 export const VERIFY_ACCOUNT = "verify_account";
+export const UPLOAD_AVATAR = "upload_avatar";
 
 // for site
 export const SITE_LAYOUT = "site_layout";

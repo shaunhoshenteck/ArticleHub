@@ -130,3 +130,24 @@ export const accountVerify = (token) => {
     }
   };
 };
+
+export const uploadAvatar = (avatarUrl, _id) => {
+  return async (dispatch) => {
+    try {
+      console.log(avatarUrl);
+      console.log(_id);
+      await axios.patch(
+        `/api/users/upload_avatar`,
+        {
+          _id: _id,
+          avatar: avatarUrl,
+        },
+        getAuthHeader()
+      );
+      dispatch(users.uploadAvatar(avatarUrl));
+      dispatch(users.successGlobal("Avatar Image Uploaded"));
+    } catch (err) {
+      dispatch(users.errorGlobal(err.response.data.message));
+    }
+  };
+};

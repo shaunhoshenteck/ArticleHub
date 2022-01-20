@@ -4,6 +4,7 @@ import {
   CHANGE_USER_EMAIL,
   UPDATE_USER_PROFILE,
   VERIFY_ACCOUNT,
+  UPLOAD_AVATAR,
 } from "../types";
 
 let DEFAULT_USER_STATE = {
@@ -35,6 +36,8 @@ export default function usersReducer(state = DEFAULT_USER_STATE, action) {
       return { ...state, data: { ...action.payload } };
     case VERIFY_ACCOUNT:
       return { ...state, data: { ...state.data, verified: true } };
+    case UPLOAD_AVATAR:
+      return { ...state, data: { ...state.data, avatar: action.payload } };
     default:
       return state;
   }

@@ -164,6 +164,29 @@ router.get("/verify", async (req, res) => {
   }
 });
 
+router.patch(
+  "/upload_avatar",
+  checkLoggedIn,
+  grantAccess("updateOwn", "profile"),
+  async (req, res) => {
+    try {
+      if ((await User.findById(req.body._id)) === null) {
+        return res.status(400).json({ message: "ID does not exist" });
+      }
+
+      const user = await User.findOneAndUpdate(
+        { _id: req.user._id },
+        { avatar: req.body.avatar },
+        { new: true, useFindAndModify: false }
+      );
+
+      res.status(200).send({ avatar: user.avatar });
+    } catch (err) {
+      res.status(400).json({ message: "Problem updating", error: err });
+    }
+  }
+);
+
 const getUserProps = (props) => {
   return {
     _id: props._id,
@@ -173,6 +196,7 @@ const getUserProps = (props) => {
     age: props.age,
     role: props.role,
     verified: props.verified,
+    avatar: props.avatar,
   };
 };
 

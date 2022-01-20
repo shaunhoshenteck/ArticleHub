@@ -4,6 +4,7 @@ const formidableMiddleware = require("express-formidable");
 const cloudinary = require("cloudinary").v2;
 const path = require("path");
 const { DEFAULT_ENCODING } = require("crypto");
+const { grantAccess } = require("../../middleware/roles");
 let router = express.Router();
 require("dotenv").config();
 

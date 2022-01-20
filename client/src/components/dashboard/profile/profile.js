@@ -29,9 +29,8 @@ const UserProfile = () => {
   });
   return (
     <form
-      className="mt-3"
+      className="mt-3 article_form"
       style={{ maxWidth: "250px" }}
-      article_form
       onSubmit={formik.handleSubmit}>
       <div className="form-group">
         <TextField
@@ -64,9 +63,7 @@ const UserProfile = () => {
         type="submit"
         className="mt-3"
         variant="contained"
-        color="primary"
-        Edit
-        Profile>
+        color="primary">
         Edit Profile
       </Button>
     </form>

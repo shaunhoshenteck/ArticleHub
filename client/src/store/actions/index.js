@@ -18,6 +18,7 @@ import {
   GET_CATEGORIES,
   ADD_CATEGORY,
   NAV_SEARCH,
+  UPLOAD_AVATAR,
 } from "../types";
 
 // ARTICLES
@@ -98,6 +99,10 @@ export const updateUserProfile = (userData) => {
 
 export const accountVerify = () => {
   return { type: VERIFY_ACCOUNT };
+};
+
+export const uploadAvatar = (avatarUrl) => {
+  return { type: UPLOAD_AVATAR, payload: avatarUrl };
 };
 
 // SITE

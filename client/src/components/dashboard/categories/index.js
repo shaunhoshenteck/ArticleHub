@@ -29,8 +29,8 @@ const Categories = () => {
               {articles.categories
                 ? articles.categories.map((item) => {
                     return (
-                      <tr key={item.id}>
-                        <td>{item.name}</td>
+                      <tr key={item._id}>
+                        <td key={item._id}>{item.name}</td>
                       </tr>
                     );
                   })

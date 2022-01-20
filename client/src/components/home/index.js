@@ -31,7 +31,15 @@ const Home = () => {
   }, [dispatch, articles]);
   return (
     <>
-      <div>CAROUSEL</div>
+      <div
+        style={{
+          fontFamily: "Fredoka One",
+          width: "100%",
+          textAlign: "center",
+        }}
+        className="mb-3">
+        Recent Articles
+      </div>
 
       <Grid container spacing={2} className="article_container">
         {articles && articles.articles

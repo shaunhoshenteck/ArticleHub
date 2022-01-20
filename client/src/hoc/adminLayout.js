@@ -31,6 +31,12 @@ const AdminLayout = (props) => {
                     button>
                     <ListItemText primary="Categories"></ListItemText>
                   </ListItem>
+                  <ListItem
+                    component={RouterLink}
+                    to="/dashboard/testupload"
+                    button>
+                    <ListItemText primary="Avatar"></ListItemText>
+                  </ListItem>
                 </>
               ) : null}
             </List>

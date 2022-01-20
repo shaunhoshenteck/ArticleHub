@@ -19,7 +19,9 @@ const Auth = (props) => {
       email: Yup.string()
         .required("Sorry the email is required")
         .email("This is not a valid email"),
-      password: Yup.string().required("Sorry the password is required"),
+      password: Yup.string()
+        .required("Sorry the password is required")
+        .min(8, "Sorry, you need a minimum of length 8 for your password"),
     }),
     onSubmit: (values, { resetForm }) => handleSubmit(values),
   });
@@ -63,8 +65,7 @@ const Auth = (props) => {
               label="Enter your email"
               variant="outlined"
               {...formik.getFieldProps("email")}
-              {...errorHelper(formik, "email")}
-            ></TextField>
+              {...errorHelper(formik, "email")}></TextField>
           </div>
           <div className="form-group">
             <TextField
@@ -74,15 +75,13 @@ const Auth = (props) => {
               label="Enter your password"
               variant="outlined"
               {...formik.getFieldProps("password")}
-              {...errorHelper(formik, "password")}
-            ></TextField>
+              {...errorHelper(formik, "password")}></TextField>
           </div>
           <Button
             variant="contained"
             color="primary"
             type="submit"
-            size="large"
-          >
+            size="large">
             {register ? "Register" : "Login"}
           </Button>
           <Button
@@ -92,8 +91,7 @@ const Auth = (props) => {
             size="small"
             onClick={() => {
               setRegister(!register);
-            }}
-          >
+            }}>
             Want to {!register ? "Register" : "Login"} ?
           </Button>
         </form>

@@ -97,6 +97,8 @@ const Avatar = () => {
             </div>
           )}
         </>
+      ) : loading ? (
+        <Loader></Loader>
       ) : null}
     </AdminLayout>
   );
